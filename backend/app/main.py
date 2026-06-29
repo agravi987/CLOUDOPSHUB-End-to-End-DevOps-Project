@@ -3,7 +3,11 @@ from fastapi import FastAPI
 app = FastAPI()
 
 @app.get("/")
-def home():
+def root():
+    return {"message":"CloudOpsHub"}
+
+@app.get("/health")
+def health():
     return {
-        "message": "Welcome to CloudOpsHub 🚀"
+        "status":"healthy"
     }
