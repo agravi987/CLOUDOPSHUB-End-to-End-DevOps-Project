@@ -26,3 +26,16 @@ Started documenting our learning in docs/03-python.md.
     Understood why **init**.py exists.
     Added a professional /health endpoint.
     Connected the idea of /health with Kubernetes self-healing.
+
+3.
+
+Correct separation of responsibilities:
+.env stores secrets and environment-specific values.
+config/settings.py loads and exposes configuration to the application.
+Installed python-dotenv.
+Created the first .env file.
+Built a configuration layer (settings.py).
+Updated main.py to use configuration instead of hardcoded values.
+Created a proper .gitignore.
+Learned why committing secrets to Git is dangerous.
+Introduced the best practice of using .env.example.

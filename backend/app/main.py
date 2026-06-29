@@ -1,13 +1,11 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+from app.config.settings import APP_NAME
+
+app = FastAPI(title=APP_NAME)
 
 @app.get("/")
 def root():
-    return {"message":"CloudOpsHub"}
-
-@app.get("/health")
-def health():
     return {
-        "status":"healthy"
+        "message":APP_NAME
     }
