@@ -39,3 +39,41 @@ Updated main.py to use configuration instead of hardcoded values.
 Created a proper .gitignore.
 Learned why committing secrets to Git is dangerous.
 Introduced the best practice of using .env.example.
+
+4.
+
+Mini Summary (Current Chat)
+✅ What We Learned
+Understood the difference between a Database and a DBMS.
+Learned why PostgreSQL is chosen for production applications.
+Installed:
+sqlalchemy
+psycopg2-binary
+Updated the .env configuration with database details.
+Created the database connection layer (database.py).
+Learned the purpose of:
+create_engine()
+SessionLocal
+Base
+Built our first ORM model: Task.
+
+5.
+
+Why database schema changes should be handled with migrations (later using Alembic).
+Why each request gets its own database session.
+Introduced the complete request flow:
+Router → Schema → Service → Database
+Created the first request schema (TaskCreate).
+Built the first business logic function (create_task).
+Started the router layer.
+Learned the purpose of:
+db.add()
+db.commit()
+db.refresh()
+Introduced the Single Responsibility Principle (SRP).
+
+6. Completed Backend CRUD Operations for Task
+- Updated `schemas/task.py` to include comprehensive Pydantic models: `TaskBase`, `TaskCreate`, `TaskUpdate`, and `TaskOut`.
+- Implemented full CRUD logic in `routers/task_router.py` (GET all, GET by ID, POST, PUT, DELETE).
+- Included the `task_router` into the main application via `app.include_router()`.
+- Added step-by-step explanatory comments in the router detailing the flow of each HTTP request, from parameter extraction to database session handling, execution, and returning the result.
