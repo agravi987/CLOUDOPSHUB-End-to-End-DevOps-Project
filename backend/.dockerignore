@@ -1,0 +1,43 @@
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Local virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment variables and secrets
+.env
+*.env
+.env.*
+secrets.json
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker configurations (optional)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Build and package artifacts
+build/
+dist/
+*.egg-info/
