@@ -23,7 +23,7 @@ jobs:
           pip install -r backend/requirements.txt
 
       - name: Verify Docker
-        run: docker-version
+        run: docker --version
 
       - name: Check Python Syntax
         run: |

@@ -149,3 +149,17 @@ Introduced the purpose of .dockerignore.
     Introduced Multi-Stage Builds and why they're useful.
     Learned the concept of Health Checks.
     Connected today's learning with future Kubernetes concepts.
+
+12.
+
+Reviewed why .env and .venv should not be included in Docker images.
+Introduced Continuous Integration (CI).
+Learned what GitHub Actions is and why it's used.
+Created our first workflow:
+Trigger on push.
+Checkout code.
+Set up Python.
+Install dependencies.
+Verify Docker.
+Compile Python code.
+Understood that GitHub Actions runs on a fresh Ubuntu VM for every workflow.
