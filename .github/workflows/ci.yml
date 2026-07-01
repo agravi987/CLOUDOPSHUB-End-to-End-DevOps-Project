@@ -34,3 +34,19 @@ jobs:
           docker build \
             -t cloudopshub:test \
             -f docker/backend/Dockerfile .
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/backend/Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/cloudopshub:latest
+            ${{ secrets.DOCKER_USERNAME }}/cloudopshub:${{ github.sha }}
