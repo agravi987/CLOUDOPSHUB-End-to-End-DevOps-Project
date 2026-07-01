@@ -121,4 +121,31 @@ docker rm
 Learned the complete Docker container lifecycle.
 Introduced the purpose of .dockerignore.
 
+10. Why localhost doesn't work between containers.
+    How Docker Compose manages multiple services.
+    Built a compose.yaml with:
+    Backend service
+    PostgreSQL service
+    Learned:
+    build
+    image
+    ports
+    depends_on
+    environment
+    Understood Docker's internal DNS using service names.
+    Introduced Docker Volumes for persistent database storage.
+    Learned:
+    docker compose up
+    docker compose up -d
+    docker compose down
 
+11. Why a working Docker image isn't always production-ready.
+    Created and understood the purpose of .dockerignore.
+    Learned about Docker Build Context.
+    Understood how .dockerignore improves:
+    Build speed
+    Image cleanliness
+    Security
+    Introduced Multi-Stage Builds and why they're useful.
+    Learned the concept of Health Checks.
+    Connected today's learning with future Kubernetes concepts.

@@ -1,0 +1,27 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:17
+
+    environment:
+      POSTGRES_DB: cloudopshub
+
+      POSTGRES_USER: postgres
+
+      POSTGRES_PASSWORD: postgres
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
