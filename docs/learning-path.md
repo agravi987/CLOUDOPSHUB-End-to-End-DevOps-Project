@@ -163,3 +163,247 @@ Install dependencies.
 Verify Docker.
 Compile Python code.
 Understood that GitHub Actions runs on a fresh Ubuntu VM for every workflow.
+
+13. Reviewed how CI stops immediately when a critical step fails.
+    Fixed another GitHub Actions typo (compileeall → compileall).
+    Learned how compileall catches Python syntax errors.
+    Introduced Docker Hub as a container registry.
+    Planned a CI pipeline that:
+    Logs in securely.
+    Builds the Docker image.
+    Pushes versioned images automatically.
+
+14.
+
+Reviewed how CI stops immediately when a critical step fails.
+Fixed another GitHub Actions typo (compileeall → compileall).
+Learned how compileall catches Python syntax errors.
+Introduced Docker Hub as a container registry.
+Planned a CI pipeline that:
+Logs in securely.
+Builds the Docker image.
+Pushes versioned images automatically.
+
+15.
+
+Understood how SSH communicates with a remote EC2 server.
+Configured PuTTY to use an AWS key pair.
+Learned essential Linux commands:
+pwd
+whoami
+hostname
+uname -a
+ls
+Learned the purpose of apt update vs apt upgrade.
+Prepared the server for Docker installation.
+
+16. Installed Docker from Docker's official repository.
+    Understood the purpose of GPG keys and package repositories.
+    Installed:
+    Docker Engine
+    Docker CLI
+    Docker Compose Plugin
+    Buildx
+    Configured Docker for the ubuntu user.
+    Ran the first container using hello-world.
+
+17.
+
+Reviewed Linux group permissions and why reconnecting after usermod is necessary.
+Understood that production servers pull prebuilt Docker images instead of rebuilding them.
+Prepared the deployment structure for EC2.
+Learned how to:
+Pull images from Docker Hub.
+Start containers with Docker Compose.
+Verify deployments.
+Use logs for troubleshooting.
+
+18.
+
+Reviewed Linux group permissions and why reconnecting after usermod is necessary.
+Understood that production servers pull prebuilt Docker images instead of rebuilding them.
+Prepared the deployment structure for EC2.
+Learned how to:
+Pull images from Docker Hub.
+Start containers with Docker Compose.
+Verify deployments.
+Use logs for troubleshooting.
+
+19. Your EC2 instance running.
+    docker ps showing the backend and PostgreSQL containers.
+    curl localhost:8000 returning your API response.
+
+20.
+
+What We Decided
+We do not need to buy a domain right now.
+We'll continue learning using your EC2 public IP.
+HTTPS with Let's Encrypt will come later when you have a domain.
+We'll prioritize real DevOps skills over spending money.
+
+21.
+
+Introduced Nginx as a reverse proxy.
+Containerized Nginx instead of installing it directly on Ubuntu.
+Created an nginx.conf to forward requests to the FastAPI service.
+Updated compose.yaml to include an Nginx container.
+Learned how Docker's internal DNS lets containers communicate using service names like backend.
+
+22.
+
+Why a single backend eventually becomes a bottleneck.
+How Nginx distributes traffic across multiple backend instances.
+The idea of Docker Compose scaling.
+Common load-balancing algorithms:
+Round Robin
+Least Connections
+IP Hash
+Why horizontal scaling improves both performance and availability
+
+23.
+
+Introduced Prometheus as a metrics collector.
+Introduced Grafana as a visualization platform.
+Understood the difference between metrics and logs.
+Added Prometheus and Grafana to our Docker Compose architecture.
+Learned why exporters are needed to collect real system metrics.
+
+24. curl localhost:9090 works, so Prometheus is running correctly.
+    The issue is most likely outside the container (AWS networking or campus firewall).
+    We have a structured debugging plan:
+    Check Docker port mapping.
+    Verify the EC2 Security Group.
+    Test from a different network (mobile hotspot).
+    Confirm external reachability.
+
+25.
+
+Your EC2 deployment is healthy.
+Prometheus is reachable from outside the server.
+The issue is specific to your college Wi-Fi, not your application or AWS setup.
+Rather than exposing multiple ports, we'll route everything through Nginx on port 80, which is also the more production-oriented design.
+
+26. Added Prometheus container.
+
+Configured:
+
+prometheus.yml
+
+Created scrape jobs.
+
+Initially monitored:
+
+Prometheus itself
+💡 Learned
+Metrics
+Scraping
+Time-series database
+Prometheus architecture
+
+Added Grafana.
+
+Opened:
+
+http://EC2_PUBLIC_IP:3000
+
+Connected Prometheus as the data source.
+
+💡 Learned
+Dashboards
+Visualization
+Data Sources
+
+Added:
+
+prom/node-exporter
+
+Mounted:
+
+/proc
+/sys
+/
+
+Configured Prometheus:
+
+- job_name: node-exporter
+
+Verified:
+
+node-exporter:9100
+
+Imported:
+
+Node Exporter Full Dashboard.
+
+💡 Learned
+
+Node Exporter exposes:
+
+CPU
+Memory
+Disk
+Network
+Filesystem
+Linux host metrics
+
+Architecture:
+
+Linux
+│
+Node Exporter
+│
+Prometheus
+│
+Grafana
+
+Added:
+
+gcr.io/cadvisor/cadvisor
+
+Mounted:
+
+Docker runtime
+Docker storage
+Root filesystem
+Kernel information
+
+Configured Prometheus:
+
+- job_name: cadvisor
+
+Imported Docker dashboard.
+
+💡 Learned
+
+cAdvisor monitors:
+
+Container CPU
+Container Memory
+Network usage
+Filesystem usage
+Docker container metrics
+
+Architecture:
+
+Docker Containers
+│
+cAdvisor
+│
+Prometheus
+│
+Grafana
+
+                   Linux Host
+                       │
+        ┌──────────────┴──────────────┐
+        │                             │
+        ▼                             ▼
+
+Node Exporter cAdvisor
+│ │
+└──────────────┬──────────────┘
+▼
+Prometheus
+│
+▼
+Grafana
